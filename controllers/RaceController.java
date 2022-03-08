@@ -40,6 +40,15 @@ public class RaceController {
 		}
 	}
 	
+	public void printWinners() {
+		int counter = 0;
+		for (Race f : Data.getRaces()) {
+			System.out.println("Gagnant : " + f.GetWinner().getName());
+			counter++;
+			if (counter >= 10) break;
+		}
+	}
+	
 	public boolean AddHorseToRace(String raceName,Horse horse){
 		Race race = raceDao.getRaceByName(raceName);
 		if(race == null) {
@@ -65,7 +74,7 @@ public class RaceController {
 		if(race == null) {
 			return false;
 		}
-		System.out.println("Voici les scènes du race : ");
+		System.out.println("Voici les horses du race : ");
 		for(Horse s : race.getHorses()) {
 			System.out.println(s.getName());
 		}

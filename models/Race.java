@@ -8,6 +8,7 @@ import java.util.List;
 public class Race {
 
 	List<Horse> horses;
+	Horse winner;
 	String name;
 	LocalDateTime date;
 	
@@ -50,6 +51,14 @@ public class Race {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Horse GetWinner() {
+		return this.winner;
+	}
+	
+	public void SetWinner(Horse horse) {
+		this.winner = horse;	
 	}
 	
 }
