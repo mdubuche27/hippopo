@@ -43,6 +43,7 @@ public class RaceController {
 	public void printWinners() {
 		int counter = 0;
 		for (Race f : Data.getRaces()) {
+			System.out.println("Course " + f.getName());
 			System.out.println("Gagnant : " + f.GetWinner().getName());
 			counter++;
 			if (counter >= 10) break;
