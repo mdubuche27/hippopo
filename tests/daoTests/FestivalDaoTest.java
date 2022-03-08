@@ -4,87 +4,87 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import daos.FestivalDao;
+import daos.RaceDao;
 import models.Data;
-import models.Festival;
-import models.Scene;
+import models.Race;
+import models.Horse;
 
-public class FestivalDaoTest {
-	FestivalDao festivalDaoTest;
+public class RaceDaoTest {
+	RaceDao raceDaoTest;
 	
 	@Test
-	public void getFestivalsTestNotNull() {
-		festivalDaoTest = new FestivalDao();
-		assertNotNull(festivalDaoTest.getAllFestivals());
+	public void getRacesTestNotNull() {
+		raceDaoTest = new RaceDao();
+		assertNotNull(raceDaoTest.getAllRaces());
 	}
 	
 	@Test
-	public void addFestivalToListTestOk() {
-		Festival festival = new Festival();
-		festivalDaoTest = new FestivalDao();
-		assertTrue(festivalDaoTest.addFestivalToList(festival));
+	public void addRaceToListTestOk() {
+		Race race = new Race();
+		raceDaoTest = new RaceDao();
+		assertTrue(raceDaoTest.addRaceToList(race));
 	}
 	
 	
 	@Test
-	public void deleteFestivalToListTestOk() {
-		Festival festival = new Festival();
-		festivalDaoTest = new FestivalDao();
-		festivalDaoTest.getFestivals().add(festival);
-		assertTrue(festivalDaoTest.deleteFestivalToList(festival));
+	public void deleteRaceToListTestOk() {
+		Race race = new Race();
+		raceDaoTest = new RaceDao();
+		raceDaoTest.getRaces().add(race);
+		assertTrue(raceDaoTest.deleteRaceToList(race));
 	}
 	
 	@Test
-	public void AddSceneToFestivalTestOk() {
-		festivalDaoTest = new FestivalDao();
-		Festival f = new Festival();
-		Scene s = new Scene();
-		assertTrue(festivalDaoTest.addSceneToFestival(s,f));
+	public void AddHorseToRaceTestOk() {
+		raceDaoTest = new RaceDao();
+		Race f = new Race();
+		Horse s = new Horse();
+		assertTrue(raceDaoTest.addHorseToRace(s,f));
 	}
 	
 	@Test
-	public void DeleteSceneToFestivalTestOk() {
-		festivalDaoTest = new FestivalDao();
-		Festival f = new Festival();
-		Scene s = new Scene();
-		Data.getFestivals().add(f);
-		Data.getFestivals().get(0).getScenes().add(s);
-		assertTrue(festivalDaoTest.deleteSceneFromFestival(s, f));
-		assertEquals(0,festivalDaoTest.getAllFestivals().get(0).getScenes().size());
+	public void DeleteHorseToRaceTestOk() {
+		raceDaoTest = new RaceDao();
+		Race f = new Race();
+		Horse s = new Horse();
+		Data.getRaces().add(f);
+		Data.getRaces().get(0).getHorses().add(s);
+		assertTrue(raceDaoTest.deleteHorseFromRace(s, f));
+		assertEquals(0,raceDaoTest.getAllRaces().get(0).getHorses().size());
 	}
 	
 	@Test
-	public void getSceneFromFestivalBySceneNameTestOk() {
-		festivalDaoTest = new FestivalDao();
-		Festival f = new Festival();
-		Scene s = new Scene("SceneTest");
-		Data.getFestivals().add(f);
-		Data.getFestivals().get(0).getScenes().add(s);
-		assertNotNull(festivalDaoTest.getSceneFromFestivalBySceneName(f, "SceneTest"));
+	public void getHorseFromRaceByHorseNameTestOk() {
+		raceDaoTest = new RaceDao();
+		Race f = new Race();
+		Horse s = new Horse("HorseTest");
+		Data.getRaces().add(f);
+		Data.getRaces().get(0).getHorses().add(s);
+		assertNotNull(raceDaoTest.getHorseFromRaceByHorseName(f, "HorseTest"));
 	}
 	
 	@Test
-	public void getSceneFromFestivalBySceneNameTestReturnNull() {
-		festivalDaoTest = new FestivalDao();
-		Festival f = new Festival();
-		Data.getFestivals().add(f);
-		assertNull(festivalDaoTest.getSceneFromFestivalBySceneName(f, "SceneTest"));
+	public void getHorseFromRaceByHorseNameTestReturnNull() {
+		raceDaoTest = new RaceDao();
+		Race f = new Race();
+		Data.getRaces().add(f);
+		assertNull(raceDaoTest.getHorseFromRaceByHorseName(f, "HorseTest"));
 	}
 	
 	@Test
-	public void getSceneFromFestivalBySceneNameTestIsNull() {
-		festivalDaoTest = new FestivalDao();
-		assertNull(festivalDaoTest.getSceneFromFestivalBySceneName(null, "SceneTest"));
+	public void getHorseFromRaceByHorseNameTestIsNull() {
+		raceDaoTest = new RaceDao();
+		assertNull(raceDaoTest.getHorseFromRaceByHorseName(null, "HorseTest"));
 	}
 	
 	@Test
-	public void updateFestivalNameTest() {
-		festivalDaoTest = new FestivalDao();
-		Festival f = new Festival("Test");
+	public void updateRaceNameTest() {
+		raceDaoTest = new RaceDao();
+		Race f = new Race("Test");
 		String newName = "Test2";
-		Data.getFestivals().add(f);
-		festivalDaoTest.updateFestivalName(f, newName);
-		assertTrue(festivalDaoTest.getAllFestivals().get(0).getName().equals(newName));
+		Data.getRaces().add(f);
+		raceDaoTest.updateRaceName(f, newName);
+		assertTrue(raceDaoTest.getAllRaces().get(0).getName().equals(newName));
 	}
 	
 	

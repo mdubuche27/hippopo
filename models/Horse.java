@@ -10,6 +10,12 @@ public class Horse {
 		age = 0;
 		winNb = 0;
 	}
+	
+	public Horse(String name) {
+		this();
+		this.name = name;
+	}
+	
 	public Horse(String name,int age) {
 		this();
 		this.name = name;

@@ -3,6 +3,7 @@ package controllers;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import daos.HorseDao;
 import daos.RaceDao;
 import models.Data;
 import models.Horse;
@@ -11,10 +12,12 @@ import models.Race;
 public class RaceController {
 
 	RaceDao raceDao;
+	HorseDao horseDao;
 	HorseController horseController;
 	
 	public RaceController() {
 		raceDao = new RaceDao();
+		horseDao = new HorseDao();
 		horseController = new HorseController();
 	}
 	
@@ -92,5 +95,29 @@ public class RaceController {
 	
 	public Race getRaceByName(String raceName) {
 		return raceDao.getRaceByName(raceName);
+	}
+	
+	public boolean AddHorseToRace(String horseName,String raceName) {
+		Horse h = horseDao.getHorseByName(horseName);
+		Race r = raceDao.getRaceByName(raceName);
+		if(r != null && h != null) {
+			List<Horse> Horses = r.getHorses();
+			Horses.add(h);
+			return raceDao.addHorseToRace(h, r);
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public boolean RemoveHorseToRace(String horseName,String raceName) {
+		Horse h = horseDao.getHorseByName(horseName);
+		Race r = raceDao.getRaceByName(raceName);
+		if(r != null && h != null) {
+			return raceDao.deleteHorseFromRace(h, r);
+		}
+		else {
+			return false;
+		}
 	}
 }

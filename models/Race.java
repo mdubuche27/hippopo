@@ -17,6 +17,12 @@ public class Race {
 		date = LocalDateTime.now();
 	}
 	
+	public Race(String name) {
+		this();
+		this.name = name;
+	}
+
+	
 	public Race(String name, LocalDateTime date, List<Horse> horses) {
 		this();
 		this.name = name;

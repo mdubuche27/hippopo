@@ -41,6 +41,8 @@ public class MenuView {
 		System.out.println("6-afficher les horse");
 		System.out.println("7-Suppr une horse");
 		System.out.println("8-Update horseName");
+		System.out.println("9-Ajouter Horse a Race");
+		System.out.println("10- Suppr Horse de Race");
 		
 		switch (Utilitaire.saisieString()) {
 		
@@ -141,6 +143,36 @@ public class MenuView {
 				
 			break;
 
+		case "9":
+			System.out.println("9-Ajouter Horse a Race");
+			System.out.println("Saisissez un nom du race à supprimer : ");
+			raceController.printRaces();
+			raceName = Utilitaire.saisieString();
+			System.out.println("Saisissez un nom du horse à supprimer : ");
+			HorseController.printHorses();
+			horseName = Utilitaire.saisieString();
+			if(raceController.AddHorseToRace(raceName, horseName))
+				System.out.println("L'ajout a réussi");
+			else
+				System.out.println("L'ajout a échoué");
+			
+			break;
+			
+		case "10":
+			System.out.println("10- Suppr Horse de Race");
+			System.out.println("Saisissez un nom du race à supprimer : ");
+			raceController.printRaces();
+			raceName = Utilitaire.saisieString();
+			System.out.println("Saisissez un nom du horse à supprimer : ");
+			HorseController.printHorses();
+			horseName = Utilitaire.saisieString();
+			if(raceController.deleteHorseFromRace(raceName, horseName))
+				System.out.println("La suppr a réussi");
+			else
+				System.out.println("La suppr a échoué");
+			
+			break;
+			
 		default:
 			break;
 		}
