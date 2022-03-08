@@ -40,6 +40,7 @@ public class HorseDaoTest {
 	public void updateRaceNameTest() {
 		horseDaoTest = new HorseDao();
 		Horse horse = new Horse("test");
+		horseDaoTest.addHorseToList(horse);
 		String newName = "Test2";
 		Data.getHorses();
 		horseDaoTest.updateHorseName(horse, newName);

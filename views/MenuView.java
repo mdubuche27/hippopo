@@ -5,6 +5,7 @@ import daos.HorseDao;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import controllers.HorseController;
@@ -42,7 +43,8 @@ public class MenuView {
 		System.out.println("7-Suppr une horse");
 		System.out.println("8-Update horseName");
 		System.out.println("9-Ajouter Horse a Race");
-		System.out.println("10- Suppr Horse de Race");
+		System.out.println("a- Suppr Horse de Race");
+		System.out.println("b- Afficher les horse d'une Race");
 		
 		switch (Utilitaire.saisieString()) {
 		
@@ -51,17 +53,20 @@ public class MenuView {
 			System.out.println("Saisissez un nom de race : ");
 			raceName = Utilitaire.saisieString();
 			System.out.println("Saisissez une date au race (yyyy-MM-dd HH:mm): ");
+			String inter = Utilitaire.saisieString();
+			System.out.println(inter);
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-			LocalDateTime raceDate = LocalDateTime.parse(Utilitaire.saisieString(), formatter);
+			LocalDateTime raceDate = LocalDateTime.parse(inter, formatter);
 			System.out.println("Saisissez le nom des horses : ");
-			List<Horse> horses = null;
+			HorseController.printHorses();
+			List<Horse> horses = new ArrayList<Horse>();
 			for (int i = 1; i <= 6; i++) {
 				System.out.println("     Saisissez le nom du horse " + i + " : ");
 				String horsename = Utilitaire.saisieString();
-				Horse h = HorseDao.getHorseByName(horsename);
-				if (h != null) {
-					System.out.println("	Vous devez enregistrez nun horse valide");
-					i--;
+				Horse h = horseController.getHorseByName(horsename);
+				if (h == null) {
+					System.out.println("	Vous devez enregistrez un horse valide");
+					choix();
 				}
 				else {
 					horses.add(h);
@@ -95,7 +100,7 @@ public class MenuView {
 			raceName = Utilitaire.saisieString();
 			System.out.println("Saisissez le nouveau nom du race : ");
 			String newRaceName = Utilitaire.saisieString();
-				if(raceController.deleteRaceByName(raceName))
+				if(raceController.updateRaceName(raceName, newRaceName))
 					System.out.println("La modification a réussi");
 				else
 					System.out.println("La modification a échoué");
@@ -134,9 +139,9 @@ public class MenuView {
 			System.out.println("Saisissez un nom du horse à modifier : ");
 			HorseController.printHorses();
 			horseName = Utilitaire.saisieString();
-			System.out.println("Saisissez le nouveau nom du race : ");
-			String newHorseNmae = Utilitaire.saisieString();
-				if(horseController.deleteHorseByName(horseName))
+			System.out.println("Saisissez le nouveau nom du horse : ");
+			String newHorseName = Utilitaire.saisieString();
+				if(horseController.updateHorseName(horseName, newHorseName))
 					System.out.println("La modification a réussi");
 				else
 					System.out.println("La modification a échoué");
@@ -145,10 +150,10 @@ public class MenuView {
 
 		case "9":
 			System.out.println("9-Ajouter Horse a Race");
-			System.out.println("Saisissez un nom du race à supprimer : ");
+			System.out.println("Saisissez un nom du race : ");
 			raceController.printRaces();
 			raceName = Utilitaire.saisieString();
-			System.out.println("Saisissez un nom du horse à supprimer : ");
+			System.out.println("Saisissez un nom du horse : ");
 			HorseController.printHorses();
 			horseName = Utilitaire.saisieString();
 			if(raceController.AddHorseToRace(raceName, horseName))
@@ -158,12 +163,12 @@ public class MenuView {
 			
 			break;
 			
-		case "10":
+		case "a":
 			System.out.println("10- Suppr Horse de Race");
-			System.out.println("Saisissez un nom du race à supprimer : ");
+			System.out.println("Saisissez un nom du race  : ");
 			raceController.printRaces();
 			raceName = Utilitaire.saisieString();
-			System.out.println("Saisissez un nom du horse à supprimer : ");
+			System.out.println("Saisissez un nom du horse  : ");
 			HorseController.printHorses();
 			horseName = Utilitaire.saisieString();
 			if(raceController.deleteHorseFromRace(raceName, horseName))
@@ -172,6 +177,14 @@ public class MenuView {
 				System.out.println("La suppr a échoué");
 			
 			break;
+			
+		case "b":
+			System.out.println("Saisissez un nom du race : ");
+			raceController.printRaces();
+			raceName = Utilitaire.saisieString();
+			Race race = raceController.getRaceByName(raceName);
+			HorseController.printHorsesFromRace(race);
+			
 			
 		default:
 			break;

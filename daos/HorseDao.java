@@ -45,13 +45,13 @@ public class HorseDao {
 	}
 	
 	public static Horse getHorseByName(String nameHorse) {
-		Horse Horse = null;
+		Horse horse = null;
 		for(Horse f : getAllHorses()) {
 			if(f.getName().equals(nameHorse)) { 
-				Horse = f;
+				horse = f;
 			}
 		}
-		return Horse;
+		return horse;
 	}
 	
 	public void updateHorseName(Horse Horse, String newHorseName) {

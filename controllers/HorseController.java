@@ -21,7 +21,7 @@ public class HorseController {
 		}
 	}
 	
-	public void printHorsesFromRace(Race Race) {
+	public static void printHorsesFromRace(Race Race) {
 		for (Horse horse : Race.getHorses()) {
 			System.out.println(horse.getName());
 		} 

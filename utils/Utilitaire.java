@@ -11,7 +11,7 @@ public class Utilitaire {
 	
 	public static String saisieString() {
 		Scanner sc = new Scanner(System.in);
-		return sc.next();
+		return sc.nextLine();
 	}
 	
 	public static void WhoWin(Race _race) {
